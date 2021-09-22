@@ -1,11 +1,11 @@
 package kodlamaio.nortwind.api.controllers;
 
 import kodlamaio.nortwind.business.abstracts.ProductService;
+import kodlamaio.nortwind.core.utilities.results.DataResult;
+import kodlamaio.nortwind.core.utilities.results.Result;
 import kodlamaio.nortwind.entities.concretes.Product;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +21,12 @@ public class ProductsController {
     }
 
     @GetMapping("/getall")
-    public List<Product> getAll() {
+    public DataResult<List<Product>> getAll() {
         return this.productService.getAll();
+    }
+
+    @PostMapping("/add")
+    public Result add(@RequestBody Product product){
+        return this.productService.add(product);
     }
 }
